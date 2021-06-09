@@ -4,7 +4,6 @@
   :license {:name "EPL-1.0"
             :url "https://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[cc.qbits/tape "0.3.4"]
-                 [clj-http "3.12.0"]
                  [com.boundary/high-scale-lib "1.0.6"]
                  [exoscale/coax "1.0.0-alpha12"]
                  [http-kit "2.5.3"]

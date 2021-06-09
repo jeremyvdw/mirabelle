@@ -37,7 +37,7 @@ This I/O forwards events to [Pagerduty](https://pagerduty.com).
 - `:source-key` is the event key which will be used for the alert source in the Pagerduty payload.
 - `:summary-keys` is a list of keys which will be used to build the event summary. In this example, the summary would be `<event-host>-<event-service>-<event-state>`.
 - `:dedup-keys` is a list of keys used to build the Pagerduty dedup key in the alert payload.
- `:http-options` is an optional map for extra HTTP options (see [clj-http](https://github.com/dakrone/clj-http) for more information).
+ `:http-options` is an optional map for extra HTTP options (see [http-kit](http://http-kit.github.io/client.html#options) for more information).
 
 The raw event will also be sent to Pagerduty in the `custom_details` field. The alert timestamp will be the event time, or the current time if the event has no time.
 

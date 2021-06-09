@@ -3,7 +3,7 @@
 (ns mirabelle.io.pagerduty
   (:require [cheshire.core :as json]
             [com.stuartsierra.component :as component]
-            [clj-http.client :as client]
+            [org.httpkit.client :as http]
             [clojure.spec.alpha :as s]
             [clojure.string :as string]
             [exoscale.ex :as ex]
@@ -27,15 +27,13 @@
 (defn post
   "POST to the PagerDuty events API."
   [request-body url options]
-  (client/post url
-               (merge
-                {:body (json/generate-string request-body)
-                 :socket-timeout 5000
-                 :conn-timeout 5000
-                 :content-type :json
-                 :accept :json
-                 :throw-entire-message? true}
-                options)))
+  (let [request {:url url
+                 :method :post
+                 :body (json/generate-string request-body)
+                 :timeout 5000
+                 :headers {"Content-Type" "application/json"
+                           "Accept" "application/json"}}]
+    @(http/request (merge-with merge request options))))
 
 (defn parse-timestamp
   [event]

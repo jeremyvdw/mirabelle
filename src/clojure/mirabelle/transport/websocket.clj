@@ -6,20 +6,20 @@
             [com.stuartsierra.component :as component]
             [corbihttp.log :as log]
             [corbihttp.metric :as metric]
-            [clj-http.util :as clj-http]
             [clojure.edn :as edn]
             [clojure.string :as string]
             [mirabelle.action.condition :as condition]
             [mirabelle.index :as index]
             [mirabelle.pubsub :as pubsub]
             [mirabelle.b64 :as b64]
-            [org.httpkit.server :as http]))
+            [org.httpkit.server :as http])
+  (:import (java.net URLDecoder)))
 
 (defn http-query-map
   "Converts a URL query string into a map."
   [string]
   (apply hash-map
-         (map clj-http/url-decode
+         (map #(URLDecoder/decode % "UTF-8")
               (mapcat (fn [kv] (string/split kv #"=" 2))
                       (string/split string #"&")))))
 
